@@ -8,17 +8,22 @@ import org.mockito.kotlin.mock
 
 class GetUserNameUseCaseTest {
 
-    val userRepository = mock<UserRepository>()
+    private val userRepository = mock<UserRepository>()
 
     @Test
     fun shouldReturnDataAsInRepository() {
 
-        val testUserName = UserName("first name", "last name")
+        val testUserName = UserName(FIRST_NAME, LAST_NAME)
         Mockito.`when`(userRepository.getName()).thenReturn(testUserName)
         val useCase = GetUserNameUseCase(userRepository)
         val actual = useCase.execute()
-        val expected = UserName(firstName = "first name", lastName = "last name")
+        val expected = UserName(FIRST_NAME, LAST_NAME)
 
         Assertions.assertEquals(expected, actual)
+    }
+
+    companion object {
+        private const val FIRST_NAME = "first name"
+        private const val LAST_NAME = "last name"
     }
 }
