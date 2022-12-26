@@ -2,26 +2,20 @@ package com.example.unittesting.domain
 
 import org.junit.Test
 import org.junit.jupiter.api.Assertions
-
-
-class TestRepository : UserRepository {
-    override fun saveName(saveParam: SaveUserNameParam): Boolean {
-        TODO("Not yet implemented")
-    }
-
-    override fun getName(): UserName {
-        return UserName(firstName = "first name", lastName = "last name")
-    }
-
-}
+import org.mockito.Mockito
+import org.mockito.kotlin.mock
 
 
 class GetUserNameUseCaseTest {
 
+    val userRepository = mock<UserRepository>()
+
     @Test
     fun shouldReturnDataAsInRepository() {
-        val testRepository = TestRepository()
-        val useCase = GetUserNameUseCase(testRepository)
+
+        val testUserName = UserName("first name", "last name")
+        Mockito.`when`(userRepository.getName()).thenReturn(testUserName)
+        val useCase = GetUserNameUseCase(userRepository)
         val actual = useCase.execute()
         val expected = UserName(firstName = "first name", lastName = "last name")
 
