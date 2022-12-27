@@ -1,6 +1,7 @@
 package com.example.unittesting.domain
 
 import org.junit.Test
+import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Assertions
 import org.mockito.Mockito
 import org.mockito.kotlin.any
@@ -9,6 +10,11 @@ import org.mockito.kotlin.mock
 class SaveUserNameUseCaseTest {
 
     private val userRepository = mock<UserRepository>()
+
+    @AfterEach
+    fun tearDown() {
+        Mockito.reset(userRepository)
+    }
 
     @Test
     fun shouldNotSaveData() {
