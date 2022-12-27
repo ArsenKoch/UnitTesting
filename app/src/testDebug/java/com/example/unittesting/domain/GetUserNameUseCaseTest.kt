@@ -23,7 +23,7 @@ class GetUserNameUseCaseTest {
     }
 
     companion object {
-        private const val FIRST_NAME = "first name"
-        private const val LAST_NAME = "last name"
+        const val FIRST_NAME = "first name"
+        const val LAST_NAME = "last name"
     }
 }
